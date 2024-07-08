@@ -1,0 +1,19 @@
+module m_tb;
+wire t_clk2,t_clk3,t_clk4,t_clk5;
+wire [5:0] t_count;
+reg t_clk=1;
+always #1 t_clk = ~t_clk;
+clks mygate (.clk(t_clk),.clk2(t_clk2),.clk3(t_clk3),.clk4(t_clk4),.clk5(t_clk5),.count(t_count));
+
+initial 
+begin 
+    $dumpfile("simulation.vcd"); // Specify the VCD filename
+    $dumpvars(0, m_tb); // Dump all variables in module m_tb
+    #2;
+    $monitor($time, " t_clk=%b t_clk2=%b t_clk3=%b t_clk4=%b t_clk5= %b t_count=%b",
+                 t_clk, t_clk2, t_clk3, t_clk4, t_clk5, t_count);
+    
+    #60;
+    $finish;
+end 
+endmodule
